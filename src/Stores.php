@@ -28,6 +28,14 @@
             $this->id = (int) $new_id;
         }
 
+        function update($new_name)
+        {
+
+        $GLOBALS['DB']->exec("UPDATE stores SET name = '{$new_name}' WHERE id = {$this->getId()};");
+        $this->setName($new_name);
+        
+        }
+
         function save()
         {
             $statement = $GLOBALS['DB']->query("INSERT INTO stores (name) VALUES ('{$this->getName()}') RETURNING id;");

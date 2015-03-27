@@ -148,8 +148,21 @@
         }
 
 
+          function test_update()
+          {
 
+          //Arrange
+          $test_store = new Stores("Nike Sneaks");
+          $test_store->save();
 
+          //Act
+          $test_store->update("Red nike Shose");
+          $result = $test_store->getName();
+
+          //Assert
+          $this->assertEquals("Red nikeShose", $result);
+
+          }
 
     }
 ?>
