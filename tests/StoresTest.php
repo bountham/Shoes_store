@@ -14,6 +14,12 @@
     class StoresTest extends PHPUnit_Framework_TestCase
     {
 
+      protected function tearDown()
+        {
+          Stores::deleteAll();
+
+        }
+
 
         function test_getName()
         {
@@ -29,7 +35,7 @@
             $this->assertEquals($name, $result);
         }
 
-        function testSetName()
+        function test_SetName()
         {
             //Arrange
             $name = "Nike";
@@ -42,16 +48,16 @@
 
             //Assert
 
-            $this->assertEquals("Golf", $result);
+            $this->assertEquals($new_name, $result);
         }
 
 
 
-        function testGetId()
+        function test_GetId()
         {
             //Arrange
             $id = 1;
-            $name = "Wash the dog";
+            $name = "Nikeg";
             $test_stores = new Stores($name, $id);
 
             //Act
@@ -61,20 +67,87 @@
             $this->assertEquals(1, $result);
         }
 
-        // function testSave()
-        // {
-        //     //Arrange
-        //     $description = "Wash the dog";
-        //     $id = 1;
-        //     $test_task = new Stores($description, $id);
-        //
-        //     //Act
-        //     $test_task->save();
-        //
-        //     //Assert
-        //     $result = Stores::getAll();
-        //     $this->assertEquals($test_task, $result[0]);
-        // }
+        function test_SetId()
+        {
+          //Arrange
+          $id = 2;
+          $name = "Nike";
+          $test_stores = new Stores($name, $id);
+
+
+
+          //act
+          $test_stores->setId(2);
+
+
+          //assert
+          $result = $test_stores->getId();
+           $this->assertEquals(2,$result);
+
+
+
+        }
+
+        function testSave()
+        {
+            //Arrange
+            $name = "Nike";
+            $id = 1;
+            $test_stores = new Stores($name, $id);
+
+            //Act
+             $test_stores->save();
+
+            //Assert
+             $result = Stores::getAll();
+            $this->assertEquals($test_stores, $result[0]);
+        }
+
+
+
+        function test_GetAll()
+        {
+            //Arrange
+            $name = "Nike2";
+            $id =3;
+            $test_stores = new Stores($name, $id);
+            $test_stores->save();
+
+
+            $name2 = "Nikevone";
+            $id2 = 2;
+            $test_stores2 = new Stores($name2, $id2);
+            $test_stores2->save();
+
+            //Act
+            $result = Stores::getAll();
+
+            //Assert
+            $this->assertEquals([$test_stores, $test_stores2], $result);
+        }
+
+        function test_DeleteAll()
+        {
+            //Arrange
+            $name = "vone";
+            $id = 1;
+            $test_stores = new Stores($name, $id);
+            $test_stores->save();
+
+            $name2 = "Nike2";
+            $id2 = 2;
+            $test_stores2 = new Stores($name2, $id2);
+            $test_stores2->save();
+
+            //Act
+            stores::deleteAll();
+
+            //Assert
+            $result = stores::getAll();
+            $this->assertEquals([], $result);
+        }
+
+
 
 
 
