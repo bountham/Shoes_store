@@ -20,7 +20,7 @@
 
 
 
-  function test_delete_getStores()
+  function test_deleteStores()
       {
       //arrange
       $test_store = new Store("thaishoe");
@@ -74,7 +74,7 @@
       }
 
 
-  function test_delete_getBrands()
+  function test_deleteBrands()
       {
 
       //arrange
@@ -116,7 +116,7 @@
 
 
 
-  function test_update_database()
+  function test_updateDatabase()
       {
       //arrange
       $test_store = new Store("Nice shoes");
@@ -150,21 +150,20 @@
       }
 
 
-  function test_findByName()
+  function test_findName()
       {
 
       //arrange
-      $test_store = new Store("vancouver shoes");
-      $test_store->save();
+      $test_store = new Store("Vancouver shoes");
 
-      $test_store2 = new Store("nice");
-      $test_store2->save();
 
-      $test_store3 = new Store("lots ice");
-      $test_store3->save();
-      
+      $test_store2 = new Store("Portland shoes");
+
+
       //act
-      $result = Store::findName("nois");
+      $test_store->save();
+      $test_store2->save();
+      $result = Store::findName("shoes");
 
       //assert
       $this->assertEquals([$test_store, $test_store2], $result);
@@ -172,7 +171,7 @@
 
 
 
-  function test_findById()
+  function test_findId()
       {
 
 
