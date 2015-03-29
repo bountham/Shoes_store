@@ -34,8 +34,8 @@
       </div>
       </div>
       <div class="twelve columns">
-          {% if store_array is not empty %}
-          {% for store in store_array %}
+          {% if newStore is not empty %}
+          {% for store in newStore %}
       <div class="store">
       <p><a href="/stores/{{ store.getId() }}">{{ store.getName() }}</a>          </p>
       </div>

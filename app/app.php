@@ -16,18 +16,25 @@
         return $app['twig']->render('index.html.twig');
     });
 
-    $app->post("/stores", function() use ($app) {
-      $store_name = new Store($_POST['name']);
-      $store_name->deleteAll();
-      return $app['twig']->render('stores.html.twig', array('newStore' => Store::getAll()));
+    $app->delete('/', function() use ($app) {
+
+        if(!empty($_POST['stores'])) {
+            Store::deleteAll();
+        }
+        else {
+            Brand::deleteAll();
+        }
+
+        return $app['twig']->render('index.html.twig', array('newStore' => Store::getAll()));
     });
 
 
-
-
-
-
-    return $app;
+    $app->post("/stores", function() use ($app) {
+      $store_name = new Store($_POST['add_store']);
+      $store_name->save();
+      return $app['twig']->render('index.html.twig', array('newStore' => Store::getAll()));
+    });
+  return $app;
 
 
 
