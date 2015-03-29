@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <title>Shoe Store</title>
+  </head>
+  <body>
+    <div class="container">
+          <h2>Red Dragon Shoes</h2>
+          <p><a href="/">Home</a> &gt; {{ brand.getName() }}</p>
+  <div class="row">
+    <h3{{ brand.getName() }}</h3>
+  <form class="" action="/brands" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="delete_brand" value="{{ brand.getId() }}">
+      <button class="caution" type="submit">Delete</button>
+    </form>
+  <form action="/brands/{{ brand.getId() }}" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <label for="edit_brand">Update Name</label>
+      <input type="text" name="edit_brand" id="edit_brand">
+      <button class="button-primary" type="submit">Update</button>
+  </form>
+  </div>
+    <h4>Stores that carry {{ brand.getName() }} </h4>
+
+    {% if new_store is not empty %}
+    {% for store in new_store %}
+    <div class="store">
+    <p>
+    <a href="/stores/{{ store.getId() }}">{{ store.getName() }}</a>
+    </p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+  <div class="row">
+      <h4 class="soft-underline">All Stores</h4>
+      {% if all_stores is not empty %}
+      {% for store in all_stores %}
+      <form class="u-pull-right" action="/brands/{{ brand.getId() }}" method="post">
+        <input type="hidden" name="brand_store" value="{{ store.getId() }}">
+        <button class="button" type="submit">Add</button>
+      </form>
+      <h5>{{ store.getName() }}</h5>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+  </div>
+  </div>
+  </body>
+</html>

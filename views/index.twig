@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <title>Shoe Store</title>
+  </head>
+  <body>
+    <div class="container">
+        <h2>Red Dragon Shoes</h2>
+        <div class="row">
+              <h3>Stores</h3>
+              <form action="/" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="stores" value="delete">
+
+                <button class="caution" type="submit">Clear All</button>
+              </form>
+              <form action="/stores" method="post">
+                <label for="add_store">Add a Store</label>
+                <input type="text" name="add_store" id="add_store">
+
+                <button class="button-primary" type="submit">Add</button>
+              </form>
+          </div>
+            {% if new_store is not empty %}
+              {% for store in new_store %}
+                  <p>
+                    <a href="/stores/{{ store.getId() }}">{{ store.getName() }}</a>
+                  </p>
+              {% endfor %}
+            {% else %}
+          <p>No stores added.</p>
+            {% endif %}
+          <div class="row">
+              <h3>Brands</h3>
+              <form class="" action="/" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <input type="hidden" name="brands" value="delete">
+
+                <button class="caution" type="submit">Clear All</button>
+              </form>
+              <form class="" action="/brands" method="post">
+                <label for="add_brand">Add a Brand</label>
+                <input type="text" name="add_brand" id="add_brand">
+
+                <button class="button-primary" type="submit">Add</button>
+              </form>
+              {% if new_brand is not empty %}
+                {% for brand in new_brand %}
+          <p><a href="/brands/{{ brand.getId() }}">{{ brand.getName() }}</a>
+                    </p>
+                {% endfor %}
+              {% else %}
+            <p>No brands added.</p>
+              {% endif %}
+         </div>
+       </div>
+    </body>
+</html>
